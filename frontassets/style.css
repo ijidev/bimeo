@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    
+    background: url(../images/img 3.webp);
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  /* opacity: 0.5; */
+  /* height: 100vh !important; */
+  background-position:center;
+  background-position: fixed;
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+a, a:-webkit-any-link{
+  text-decoration: solid;
+  text-decoration:none;
+}
+
+.page-header .alert{
+   
+    border-radius: 10px;
+    /* background-color: skyblue; */
+ 
+  width: 50%;
+  text-align: center;
+  /* opacity: 0.9; */
+  margin-left: auto;
+  margin-right: auto;
+  /* padding-bottom: 100px; */
+}
+.container {
+    
+    border-radius: 10px;
+    background-color: #f5f5f5ef;
+ 
+  width: 50%;
+  /* opacity: 0.9; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: skyblue;
+  padding: 3px 20px;
+  color: black;
+}
+
+header .user {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.faq-card {
+  margin-top: 15px;
+  border: whitesmoke solid 1px;
+  border-radius: 10px;
+  overflow: auto;
+  /* margin-top: 3px; */
+}
+
+.faq-question {
+  background-color: skyblue;
+  border: whitesmoke solid 1px;
+  border-radius: 5px;
+  color: black;
+}
+
+
+/* Styles for the modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  overflow: auto;
+}
+
+/* Styles for the modal content */
+.modal-content {
+  background-color: skyblue;
+  color:white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  /* text-align: center; */
+  border-radius: 5px;
+  position: relative;
+} 
+  
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Close button for the modal */
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Style the open modal button
+#openModalBtn {
+  background-color: #4CAF50;
+  color: var(--pbc-g-blue-vibrant-20);
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+} */
+
+/* #openModalBtn:hover {
+  background-color: #45a049;
+} */
+
+header .user a{
+  padding: 0 5px;
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+section {
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.icon-list {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.icon-card {
+  width: 25%;
+  /* align-items: center; */
+  align-items: center;
+}
+
+footer .badge {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: #000;
+  background-color: rgb(31, 104, 133);
+  text-align: center;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 0.7rem;
+  position: absolute;
+  top: 3;
+  right: 30%;
+}
+.icon {
+  background-color: #4000495b;
+  text-align: center;
+  align-self: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 30px;
+ 
+  margin-left: 27%;
+  /* padding-bottom: 20px; */
+  width: 30px;
+ 
+}
+
+.tiers {
+    color:black;
+  background-color: skyblue;
+  border-radius: 20px;
+  /* padding: 5px 10px; */
+  border: 1px solid white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tiers-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+
+a {
+  color: black;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-decoration:none;
+}
+
+ul li {
+  padding-top: 10px;
+}
+
+.medal-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.medal {
+  width: 15%;
+}
+
+.medal img {
+  width: 100%;
+
+}
+
+footer {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0px;
+  
+  background-color: rgb(31, 104, 133);
+  width: 100%;
+  height: 70px;
+  
+}
+
+.footer-card {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.card-top {
+  position: relative;
+  top: -35px;
+  text-align: center;
+}
+
+.footer-card-top {
+  background-color:skyblue;
+  padding: 20px;
+  border-top:white solid 2px;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
+
+.task {
+  margin-top: 100px;
+  background: transparent;
+  background-color: skyblue;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  text-align: center;
+}
+
+
+.task button {
+  
+  border-radius: 30px;
+  height: 50px;
+  width: 120px;
+  background-color: white;
+  color: black;
+  border: none;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.starting-container {
+  background-color: skyblue;
+  padding: 15px;
+  border-radius: 20px;
+  margin-top: 20px;
+
+  &::before {
+    opacity: 0.5;
+  }
+
+
+.starting-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.starting-card {
+  border-bottom: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+.text {
+  color: black;
+  margin-top: auto;
+  margin-bottom: auto;
+}

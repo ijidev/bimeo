@@ -1,0 +1,36 @@
+HTTrack3.49-2+htsswf+htsjava launched on Sat, 09 Mar 2024 05:07:56 at gbapps.org.pk +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" gbapps.org.pk -O1 "C:\My Web Sites\aab" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+05:08:20	Warning: 	Moved Permanently for gbapps.org.pk/POST/
+05:08:20	Warning: 	File has moved from gbapps.org.pk/POST/ to https://gbapps.org.pk/
+05:08:20	Warning: 	Moved Permanently for https://gbapps.org.pk/whatsapp/
+05:08:20	Warning: 	File has moved from https://gbapps.org.pk/whatsapp/ to https://gbapps.org.pk/
+05:08:24	Error: 	"Not Found" (404) at link https://gbapps.org.pk/whatsapp-plus/POST (from https://gbapps.org.pk/whatsapp-plus/)
+05:08:25	Error: 	"Not Found" (404) at link https://gbapps.org.pk/gb-whatsapp-download/POST (from https://gbapps.org.pk/gb-whatsapp-download/)
+05:08:25	Error: 	"Not Found" (404) at link https://gbapps.org.pk/fmwhatsapp/POST (from https://gbapps.org.pk/fmwhatsapp/)
+05:08:25	Error: 	"Not Found" (404) at link https://gbapps.org.pk/ogwhatsapp/POST (from https://gbapps.org.pk/ogwhatsapp/)
+05:08:25	Error: 	"Not Found" (404) at link https://gbapps.org.pk/whatsapp-plus/download/POST (from https://gbapps.org.pk/whatsapp-plus/download/)
+05:08:26	Error: 	"Not Found" (404) at link https://gbapps.org.pk/nswhatsapp-3d/POST (from https://gbapps.org.pk/nswhatsapp-3d/)
+05:08:26	Error: 	"Not Found" (404) at link https://gbapps.org.pk/gbwhatsapp-mini/POST (from https://gbapps.org.pk/gbwhatsapp-mini/)
+05:08:26	Error: 	"Not Found" (404) at link https://gbapps.org.pk/whatsapp-online-tracker-mod-apk/POST (from https://gbapps.org.pk/whatsapp-online-tracker-mod-apk/)
+05:08:27	Error: 	"Not Found" (404) at link https://gbapps.org.pk/mbwhatsapp/POST (from https://gbapps.org.pk/mbwhatsapp/)
+05:08:27	Error: 	"Not Found" (404) at link https://gbapps.org.pk/delta-yowhatsapp/POST (from https://gbapps.org.pk/delta-yowhatsapp/)
+05:08:27	Error: 	"Not Found" (404) at link https://gbapps.org.pk/blue-whatsapp-plus/POST (from https://gbapps.org.pk/blue-whatsapp-plus/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/gbwhatsapp-pro/POST (from https://gbapps.org.pk/gbwhatsapp-pro/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/fmwhatsapp/download/POST (from https://gbapps.org.pk/fmwhatsapp/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/ogwhatsapp/download/POST (from https://gbapps.org.pk/ogwhatsapp/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/nswhatsapp-3d/download/POST (from https://gbapps.org.pk/nswhatsapp-3d/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/gbwhatsapp-mini/download/POST (from https://gbapps.org.pk/gbwhatsapp-mini/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/whatsapp-online-tracker-mod-apk/download/POST (from https://gbapps.org.pk/whatsapp-online-tracker-mod-apk/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/mbwhatsapp/download/POST (from https://gbapps.org.pk/mbwhatsapp/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/delta-yowhatsapp/download/POST (from https://gbapps.org.pk/delta-yowhatsapp/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/blue-whatsapp-plus/download/POST (from https://gbapps.org.pk/blue-whatsapp-plus/download/)
+05:08:28	Error: 	"Not Found" (404) at link https://gbapps.org.pk/gbwhatsapp-pro/download/POST (from https://gbapps.org.pk/gbwhatsapp-pro/download/)
+
+HTTrack Website Copier/3.49-2 mirror complete in 32 seconds : 65 links scanned, 40 files written (2637379 bytes overall) [1223775 bytes received at 38242 bytes/sec], 3191623 bytes transferred using HTTP compression in 52 files, ratio 24%, 3.9 requests per connection
+(21 errors, 4 warnings, 0 messages)
