@@ -31,15 +31,19 @@ class DashboardController extends Controller
     public function users()
     {
         $users = User::all();
-        return view('admin.users',compact('users'));
+        $withdraw = Withdrawal::get();
+        // dd($withdraw);
+        return view('admin.users',compact('users','withdraw'));
     }
 
     public function user($id)
     {
         $tiers = Tier::all();
         $user = User::find($id);
+        $withdraw = Withdrawal::where('user_id', $user->id)->get()->sum('amount');
+        // dd($withdraw);
         $info = UserPayment::where('user_id', $user->id)->first();
-        return view('admin.user',compact('user','tiers', 'info'));
+        return view('admin.user',compact('user','tiers', 'info','withdraw'));
     }
     
     public function bindproduct(Request $request)
@@ -103,6 +107,7 @@ class DashboardController extends Controller
             
             If($user->asset < 0){
                $user->frozen += $request->amount;
+               $user->total_recharge += $request->amount;
                
               if($user->asset + $request->amount >= 0){
                 $user->asset = 0;
@@ -114,12 +119,13 @@ class DashboardController extends Controller
            
             else{
               $user->asset += $request->amount;
+              $user->total_recharge += $request->amount;
               $user->update();
             }
 
             $notif = new Notification();
-            $notif->title = 'Account Creadited';
-            $notif->massage = 'Your Account has been creadited with $'.$request->amount;
+            $notif->title = 'Account Recharged';
+            $notif->massage = 'Your Account has been recharged with $'.$request->amount;
             $notif->user_id = $user->id;
             $notif->save();
 

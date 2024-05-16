@@ -47,20 +47,40 @@
 
         <div class="row p-3">
             <div class="col-4" style="border-right: solid 1px;">
-                {{ '£'.$user->balance }} <br>
+                {{ ' $'.$user->balance }} <br>
                 Total Profit
             </div>
 
             <div class="col-4" style="border-right: solid 1px;">
-                {{ '£'.$user->frozen }} <br>
-                frozen bal
+                {{ ' $'.$user->frozen }} <br>
+                Frozen bal
             </div>
 
             <div class="col-4" >
-                {{ '£'.$user->asset }} <br>
-                Asset Value
+                {{ ' $'.$user->asset }} <br>
+                Total Balance
             </div>
         </div>
+
+        <div class="row p-3">
+            <div class="col-4" style="border-right: solid 1px;">
+                {{ ' $'.$withdraw }} <br>
+                Total withdrawal
+            </div>
+
+            <div class="col-4" style="border-right: solid 1px;">
+                {{ ' $'.$user->total_recharge }} <br>
+                Total Recharge
+            </div>
+
+            <div class="col-4" >
+                {{ $user->total_optimized }} <br>
+                Overall Optimized
+            </div>
+        </div>
+
+        
+
     </div>
 </div>
 
@@ -90,6 +110,7 @@
         </form>
     </div>
 </div>
+
 <div class="card">
     <div class="card-header">
         <h5>Manage And Assign Product To User</h5>

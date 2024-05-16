@@ -9,35 +9,63 @@
         <table class="table table-bark ">
             <thead class="thead-light">
                 <tr>
+                    <th>S/N</th>
                     <th>Username</th>
                     <th>Membership</th>
-                    <th>Password</th>
-                    <th>Optimize</th>
+                    <th>Total Recharge</th>
+                    <th>Total withdrawal</th>
+                    <th>Mission Count</th>
+                    <th>Overall Missions</th>
                     <th>Reset Count</th>
+                    {{-- <th>Last login</th> --}}
                     <th>Status</th>
-                    <th></th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
+                @php
+                  $sn = 1;  
+                @endphp
                 @foreach ($users as $user)
                     <tr>
+                        <td>{{$sn ++}} </td> 
+
                         <td>{{ $user->name }}</td>
+
                         @if ($user->tier == null)
                             <td>Null</td>
                         @else
                             <td>{{ $user->tier->name }}</td>
                         @endif
-                        <td>{{ $user->pass }}</td>
+
+                        {{-- total recharge --}}
+                        <td>{{'$'. $user->total_recharge }}</td>
+
+                        {{-- total withdrawal --}}
+                        <td>{{ '$'. $withdraw->where('user_id', $user->id)->sum('amount') }}</td>
+
+                        {{-- mission --}}
                         @if ($user->tier == null)
                             <td>Null</td>
                         @else
                             <td>{{$user->optimized .'/'. $user->tier->daily_optimize }}</td>
                         @endif
+
+                        {{-- Overall mission --}}
+                        <td>{{ $user->total_optimized }}</td>
+
+                        {{-- Mission reset count--}}
                         @if ($user->tier == null)
                             <td>Null</td>
                         @else
                             <td>{{$user->reset_count .'/'. $user->tier->reset }}</td>
                         @endif
+
+                        {{-- last login --}}
+                        {{-- <td>
+                            {{ $user->last_login }}
+                        </td> --}}
+
                         <td>
                             @if ($user->is_active == true)
                                 <div class="badge badge-success">Active</div>

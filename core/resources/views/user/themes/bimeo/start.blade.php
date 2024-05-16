@@ -85,7 +85,7 @@
                           <form action="{{ route('start') }}" class="card-footer">
                             <button type="submit" style="text-transform:none; width:100%" 
                               class="btn btn-default btn-block btn-lg btn-important" >Start
-                              Now( {{$user->optimized . '/' . $user->tier->daily_optimize}} )
+                              Now ( {{$user->optimized . '/' . $user->tier->daily_optimize}} )
                             </button>
                           </form>
                             <br>

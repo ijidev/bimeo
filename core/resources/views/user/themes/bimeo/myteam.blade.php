@@ -3,8 +3,8 @@
 @section('content')
     <!--       header ends-->
     <div class="my-browser-flex my-browser-flex-column"
-        style="margin-top: 54px;position: absolute;top: 0;bottom: 0;left: 0;right: 0">
-        <div class="my-browser-flex-column team-item-box-margin profile-balance-title-content">
+        style="margin-top: 104px; ">
+        <div class="my-browser-flex-column team-item-box-margin profile-balance-title-content" style="margin-bottom:30px;">
 
             @foreach ($myTeam as $team)
                 <div class="my-browser-flex-item-box-bg  my-browser-flex-column" style="margin: 20px 0 40px 0 ;">
@@ -21,23 +21,23 @@
                     <div
                         class="my-browser-flex my-browser-flex-row team-item-value-box-margin team-item-value-color sky-dark-space-between">
                         <div class="my-browser-flex-column my-brower-text-left team-item-title-margin" style="">
-                            <div class="team-item-second-color">Total commission</div>
-                            <div style="">{{ $team->balance }}</div>
+                            <div class="team-item-second-color">{{ $team->name }}'s commission</div>
+                            <div style="">${{ $team->balance }}</div>
                         </div>
-                        <div class="my-browser-flex-column my-brower-text-right team-item-title-margin" style="">
+                        {{-- <div class="my-browser-flex-column my-brower-text-right team-item-title-margin" style="">
                             <div class="team-item-second-color">25% Today's subordinate rebate</div>
                             <div style="">0.00</div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div
                         class="my-browser-flex my-browser-flex-row team-item-value-box-margin team-item-value-color sky-dark-space-between">
                         <div class="my-browser-flex-column my-brower-text-left " style="margin-bottom: 10px;">
-                            <div class="team-item-second-color">Total Asset</div>
-                            <div style="">{{ $team->asset }}</div>
+                            <div class="team-item-second-color">My Commission</div>
+                            <div style="">${{ $team->balance / 100 * $ref }}</div>
                         </div>
                         <div class="my-browser-flex-column my-brower-text-right " style="margin-bottom: 10px;">
-                            <div class="team-item-second-color">25% Total subordinate rebate</div>
-                            <div style="">2.59</div>
+                            <div class="team-item-second-color">Referal Percentage</div>
+                            <div style="">%{{ $ref }}</div>
                         </div>
                     </div>
                 </div>

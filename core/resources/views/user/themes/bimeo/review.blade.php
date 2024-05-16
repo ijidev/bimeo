@@ -1,11 +1,11 @@
-@extends('user.themes.salesforce.layouts.front')
+@extends('user.themes.bimeo.layouts.base')
 
 @section('title')
 
 @endsection
 
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="color:white; text-align: center;;">
         <div class="col-md-8">
             <div class="text-center">
                 <img src="{{ asset($product->img) }}" class="rounded-circl rounded-top rounded-bottom" height="80" width="80" alt="product img"> 
@@ -13,40 +13,46 @@
                 <h4>
                     {{ $product->name }}
                 </h4>
-                <div class="row">
-                    <div class="col-6">
-                        Total amount
-                        <h6>
-                            @php
-                                $price ;
-                                $combo ;
-                               // $combo_text ;
-                            @endphp
-                            @forelse($userProduct->where('product_id',$product->id) as $userP)
-                               @php
-                                  $price = $userP->price; 
-                                  $combo = 10;
-                               @endphp
-                            @empty
-                              @php
-                                 $price =  $product->price; 
-                                 $combo = 1;
-                              @endphp
-                            @endforelse
+
+                <div class=" my-browser-flex my-browser-flex-nowrap my-browser-flex-row my-browser-flex-space-between   profile-my-balance-container-bg profile-group-bg">
+                    <div class="card-body profile-balance-title-content" style="width: 50%">
+                        <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
+                            <div class="col"  style="text-align: center">
                             
-                            £ {{ $price }}
-                        </h6>
+                                @php
+                                    $price ;
+                                    $combo ;
+                                    // $combo_text ;
+                                @endphp
+                                @forelse($userProduct->where('product_id',$product->id) as $userP)
+                                    @php
+                                        $price = $userP->price; 
+                                        $combo = 10;
+                                    @endphp
+                                @empty
+                                    @php
+                                        $price =  $product->price; 
+                                        $combo = 1;
+                                    @endphp
+                                @endforelse
+                                
+                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color"> {{ $price }} USD </div>
+                                <p class="profile-my-balance-title" style="margin-top: 6px">Total Amount</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        Profit
-                        <h6>
-                            £{{ $combo * ($price / 100 * Auth::user()->tier->percent)  }}
-                        </h6>
+                    <div class="content-v-line" style="width: 1px;height: 80px;margin-top: 10px;"></div>
+                    <div class="card-body profile-balance-title-content" style="width: 50%">
+                        <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
+                            <div class="col"  style="text-align: center">
+                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color">{{ $combo * ($price / 100 * Auth::user()->tier->percent)  }} USD </div>
+                                <p class="profile-my-balance-title" style="margin-top: 8px">Profit</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            
+
+                {{-- fetching product crated at time and ratig number --}}
             <div class="text-center mb-4 mt-4">
                 <div class="mb-4 mt-4">
                     <strong>Creation Time</strong> <br>
@@ -54,7 +60,11 @@
                 </div>
                 <div class="mb-4 mt-4">
                     <strong>Rating No.</strong> <br>
-                    {{ uniqId(5) }}
+                    {{  uniqId(5) }}
+
+                    @php
+                        echo uniqId(5)
+                    @endphp
                     
                 </div>
             </div>
@@ -133,7 +143,7 @@
                             </script>
                         </div>
 
-                        <div class="form-group mb-3 text-white">
+                       {{--  <div class="form-group mb-3 text-white">
                             <h5 class="text-light mt-4">Describe your Review (optional)</h5>
                             
                             <input type="radio" name="rating" value="Excellent! I personally used it too, very Applicable">
@@ -145,12 +155,20 @@
                         </div>
 
                         <div class="form-group mb-4">
-                            {{-- <label for="comment">Comment</label> --}}
+                            <label for="comment">Comment</label>
                             <textarea name="comment" id=""  cols="10" class="form-control" placeholder="type here"></textarea>
                         </div>
-                        <hr>
+                        <hr> --}}
                         <div class="text-center">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-primary" type="submit"
+                            style="font-size: 16px;
+                            text-transform: uppercase;
+                            font-weight: normal;
+                            padding: 10px;
+                            border-radius: 10px;
+                            margin-top: 20px;
+                            color: white;
+                            background: powderblue;">Submit</button>
 
                         </div>
                     </form>

@@ -14,7 +14,7 @@
   <!-- Custom style CSS -->
   <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
   <link rel="stylesheet" href="{{ asset('asset/css/custom.css') }}">
-  <link rel='shortcut icon' type='image/x-icon' href="{{ asset('frontassets/images/logo-salesforce.svg') }}" />
+  <link rel='shortcut icon' type='image/x-icon' href="{{ asset('bimeoassets/images/ds-logo.png') }}" />
 </head>
 <body>
   <div class="loader"></div>

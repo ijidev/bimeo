@@ -150,8 +150,9 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
-        <a href="{{ route('admin') }}"> <img alt="image" src="{{ asset('frontassets/images/logo-salesforce.svg') }}" class="header-logo" /> <span
-            class="logo-name">SalesForce</span>
+        <a href="{{ route('admin') }}"> 
+          {{-- <img alt="image" src="{{ asset('bimeoassets/images/ds-logo.png') }}" class="header-logo" />  --}}
+          <span class="logo-name">Bimeo Admin</span>
         </a>
       </div>
       <ul class="sidebar-menu">

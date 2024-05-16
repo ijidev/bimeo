@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
     <link href="{{ asset('bimeoassets/css/style3.css') }}" rel="stylesheet">
+    <link rel='shortcut icon' type='image/x-icon' href="{{ asset('bimeoassets/images/ds-logo.png') }}" />
     <link href="{{ asset('bimeoassets/styles/layer2.css') }}" type="text/css" rel="styleSheet" id="layermcss">
     @yield('head')
     <style>

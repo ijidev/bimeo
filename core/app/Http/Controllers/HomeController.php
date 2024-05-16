@@ -86,11 +86,14 @@ class HomeController extends Controller
     }
 
     public function upline(){
-        $theme_path = Setting::first()->theme_path;
+        $set = Setting::get()->first(); 
+        // dd($set);
+        $ref = $set->ref_amount;
+        $theme_path = $set->theme_path;
         $myTeam = User::where('user_id', Auth::user()->id)->get();
         // $total_intrest = $myT;
         // dd($team);
-        return view($theme_path . 'myteam' , compact('myTeam'));
+        return view($theme_path . 'myteam' , compact('myTeam', 'ref'));
     }
 
     public function checkin()
@@ -174,7 +177,8 @@ class HomeController extends Controller
             else {
                 // $product = Product::get()->random(); #randomly pick product
                 //$product = Product::orderBy('id')->first(); #pick product in serial order
-                 $currentIndex = Session::get('current_product_index', 0);
+                //  $currentIndex = Session::get('current_product_index', 0);
+                $currentIndex = Auth::user()->optimized;
 
                 // Fetch products ordered by serial or any other field
                 $product = Product::where('tier_id',Auth::user()->tier_id);
@@ -186,7 +190,7 @@ class HomeController extends Controller
                     $product = $product->orderBy('id')->skip($currentIndex)->first();
                     // Increment the index for the next request
                     $currentIndex = ($currentIndex + 1) % Product::where('tier_id',Auth::user()->tier_id)->count();
-                    Session::put('current_product_index', $currentIndex);
+                    // Session::put('current_product_index', $currentIndex);
                     // dd($product->price = 2);
                     $userProduct = UserProduct::where('user_id', Auth::user()->id)->get();
                     $review = new ProductReview();
@@ -268,6 +272,7 @@ class HomeController extends Controller
             $user->balance += $prof * $combo;
             $user->asset += $prof * $combo ;
             $user->optimized += 1 ;
+            $user->total_optimized += 1 ;
             //dd($prof, $prof *$combo ,$product->price);
             $user->update();
             
