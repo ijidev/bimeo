@@ -68,6 +68,10 @@ class User extends Authenticatable implements LaratrustUser
     {
         return $this->hasMany(Deposit::class);
     }
+    public function withdraws()
+    {
+        return $this->hasMany(Withdrawal::class);
+    }
 
     public function parent()
     {

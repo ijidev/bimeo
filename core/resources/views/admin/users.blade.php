@@ -12,12 +12,13 @@
                     <th>S/N</th>
                     <th>Username</th>
                     <th>Membership</th>
+                    <th>Owning Agent</th>
                     <th>Total Recharge</th>
                     <th>Total withdrawal</th>
                     <th>Mission Count</th>
                     <th>Overall Missions</th>
                     <th>Reset Count</th>
-                    {{-- <th>Last login</th> --}}
+                    <th>Joined at</th>
                     <th>Status</th>
                     <th>Manage</th>
                 </tr>
@@ -37,6 +38,14 @@
                         @else
                             <td>{{ $user->tier->name }}</td>
                         @endif
+
+                        <td>
+                            @if ($user->parent == null)
+                            
+                            @else
+                                {{ $user->parent->name }}
+                            @endif
+                        </td>
 
                         {{-- total recharge --}}
                         <td>{{'$'. $user->total_recharge }}</td>
@@ -62,9 +71,9 @@
                         @endif
 
                         {{-- last login --}}
-                        {{-- <td>
-                            {{ $user->last_login }}
-                        </td> --}}
+                        <td>
+                            {{ $user->created_at }}
+                        </td>
 
                         <td>
                             @if ($user->is_active == true)

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -83,6 +84,18 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('/logout', 'logout')->name('logou');
         Route::Post('/create', 'ctrate')->name('registe');
+    });
+});
+
+Route::controller(AgentController::class)->group(function () {
+    Route::get('/agent/login', 'loginform')->name('agent.login');
+    Route::get('/agent/register', 'registerform')->name('agent.register');
+    Route::Post('/agent/signup', 'signup')->name('agent.signup');
+});
+Route::middleware(['auth', 'role:agent'])->group(function () {
+    Route::controller(AgentController::class)->group(function () {
+        Route::get('/agent', 'index')->name('agent');
+        Route::get('/agent/view/{id}', 'view')->name('agent.view');
     });
 });
 

@@ -56,7 +56,10 @@ class HomeController extends Controller
         if (Auth::user()->hasRole('admin')) {
             return redirect()->route('admin');
             // return redirect()->action([DashboardController::class, 'index']);
-        } 
+        } elseif(Auth::user()->hasRole('agent'))
+        {
+            return redirect()->route('agent');
+        }
         else{
 
             $notify = Notification::where('user_id', Auth::user()->id)
