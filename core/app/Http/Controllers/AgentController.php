@@ -73,7 +73,7 @@ class AgentController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'username' => $data['name'],
-          //  'email' => $data['email'],
+           'type' => 'agent',
             'user_id' => $parent,
             'ref_id' => $uniqueCode,
             'tier_id' => $tier->id,

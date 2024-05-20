@@ -111,6 +111,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/user/{id}', 'user')->name('user');
         Route::get('/admin/user/update/{id}', 'updateUser')->name('user.update');
         
+        Route::get('/admin/agent', 'agent')->name('admin.agent');
+        Route::get('/admin/agent/manage/{id}', 'viewagent')->name('admin.agent.view');
+
         Route::get('/admin/user/product/{id}', 'userProduct')->name('user.product');
         Route::post('/admin/user/bindproduct/', 'bindproduct')->name('binduserProduct');
         Route::get('/admin/user/edit-product/{id}', 'editUserProduct')->name('edit.user.product');

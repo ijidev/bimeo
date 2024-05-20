@@ -229,6 +229,7 @@
         </li> -->
 
         <li><a class="nav-link" href="{{route('users')}}"><i data-feather="user"></i><span>Users</span></a></li>
+        <li><a class="nav-link" href="{{route('admin.agent')}}"><i data-feather="user"></i><span>Agents</span></a></li>
         <li><a class="nav-link" href="{{route('withdrawa.request')}}"><i data-feather="file"></i><span>withwdrawal</span></a></li>
         <li><a class="nav-link" href="{{route('deposit.request')}}"><i data-feather="file"></i><span>Deposit</span></a></li>
         <li><a class="nav-link" href="{{route('faq')}}"><i data-feather="file"></i><span>FAQ</span></a></li>

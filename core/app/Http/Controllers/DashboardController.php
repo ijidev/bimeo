@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Faq;
 use App\Models\Tier;
 use App\Models\User;
-use Illuminate\Support\Str;
 use App\Models\Deposit;
 use App\Models\Product;
-use App\Models\UserProduct;
-use App\Models\ProductReview;
-use App\Models\UserPayment;
 use App\Models\Setting;
-use App\Models\Notification;
 use App\Models\Withdrawal;
+use Laratrust\Models\Role;
+use App\Models\UserPayment;
+use App\Models\UserProduct;
+use Illuminate\Support\Str;
+use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Models\ProductReview;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -30,10 +31,29 @@ class DashboardController extends Controller
 
     public function users()
     {
-        $users = User::all();
+        $users = User::where('type', 'user')->get();
         $withdraw = Withdrawal::get();
         // dd($withdraw);
         return view('admin.users',compact('users','withdraw'));
+    }
+
+    public function agent()
+    {
+        $users = User::where('type', 'agent')->get();
+        $downline = User::get();
+        // dd($users);
+        $withdraw = Withdrawal::get();
+        return view('admin.agent',compact('users','withdraw','downline'));
+    }
+
+    public function viewagent($id)
+    {
+        $user = User::find($id);
+        $downlines = User::where('user_id', $user->id)->get();
+        // $downline = User::get();
+        // dd($users);
+        $withdraw = Withdrawal::get();
+        return view('admin.view_agent',compact('user','withdraw','downlines'));
     }
 
     public function user($id)

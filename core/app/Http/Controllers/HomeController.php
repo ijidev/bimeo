@@ -338,6 +338,7 @@ class HomeController extends Controller
             $user->balance += $prof * $combo;
             $user->asset += $prof * $combo;
             $user->optimized += 1 ;
+            $user->total_optimized += 1 ;
             
             $user->update();
             
