@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
     <link href="{{ asset('bimeoassets/css/style3.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel='shortcut icon' type='image/x-icon' href="{{ asset('bimeoassets/images/ds-logo.png') }}" />
     <link href="{{ asset('bimeoassets/styles/layer2.css') }}" type="text/css" rel="styleSheet" id="layermcss">
     @yield('head')
@@ -81,44 +82,30 @@
     <!-- header -->
     <div class="header head-bg" style="">
         <div class="row no-gutters">
-            <div class="col text-cente">
-                <img src="{{ asset('bimeoassets/images/ds-logo.png') }}" alt="" class="page-logo-head"
-                    style="margin-left: 20px;">
-            </div>
-            <!--
-                    <a href="/index/user/lang" style="width: 100%;height: 30px;display: inline-block;position: absolute;text-align: right;top: 20px" >-->
-            <!--
-                            <img src="../../static_catalog/img/lang.svg" style="margin-right: 20px; width: 30px;height: 30px;">
-                    </img>-->
-            <!--
-                          <div class="head-lang-text-style" style="margin-right: 12px;font-size: 12px;">Language</div>-->
-            <!--        </a>--><!--
-                            <a href="/index/my/index.html" style="width: 100%;height: 50px;display: inline-block;position: absolute;text-align: right;top: 20px" >-->
-            <!--            <img src="../../static_catalog/img/profile.png" style="margin-right: 20px; width: 30px;height: 30px;"></img>-->
-            <!--            <div class="head-text-color" style="margin-right: 12px;">Profile</div>--><!--        </a>-->
-            <!--        <a href="/index/my/cs" style="width: 100%;height: 20px;display: inline-block;position: absolute;text-align: right;top: 28px" >-->
-            <!--            <img src="../../static_catalog/img/login_cs.png" style="margin-right: 20px; width: 20px;">-->
-            <!--        </a>-->
-            <!--        <a href="/index/my/cs" style="width: 100%;height: 20px;display: inline-block;position: absolute;text-align: right;top: 28px" >-->
-            <!--            <img src="../../static_catalog/img/login_cs.png" style="margin-right: 20px; width: 20px;">-->
-            <!--            &lt;!&ndash;            <div class="head-text-color" style="margin-right: 12px;">Contact Us</div>&ndash;&gt;--><!--        </a>-->
+            <a href="{{ route('home') }}">
+                <div class=" text-cente">
+                    <img src="{{ asset('bimeoassets/images/ds-logo.png') }}" alt="" class="page-logo-head"
+                        style="margin-left: 20px;">
+                </div>
+            </a>
             
             @php
                $notify = \App\Models\Notification::where('user_id', Auth::user()->id)
             ->where('is_read', false)->get();  
             @endphp
-            <a href="{{route('notify')}}"
-                style="width: 100%;height: 30px;display: inline-block;position: absolute;text-align: right;top: 23px;">
-                <img src="{{ asset('bimeoassets/images/msg.png') }}" style="width: 30px;">
-                <span id="msg_numb"
-                    style="padding: 5px 10px;margin-right: 20px;margin-left: 5px;border-radius: 15px;background: black;color: white;">
-                    @if ($notify->count() >= 1)
-                        {{ $notify->count() }}
-                    @else
-                        0
-                    @endif
-                </span>
-            </a>
+            <div style="width: 100%;height: 30px;display: inline-block;position: absolute;text-align: right;top: 23px;">
+                <a href="{{route('notify')}}">
+                    <img src="{{ asset('bimeoassets/images/msg.png') }}" style="width: 30px;">
+                    <span id="msg_numb"
+                        style="padding: 5px 10px;margin-right: 20px;margin-left: 5px;border-radius: 15px;background: black;color: white;">
+                        @if ($notify->count() >= 1)
+                            {{ $notify->count() }}
+                        @else
+                            0
+                        @endif
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
     <!-- header ends -->

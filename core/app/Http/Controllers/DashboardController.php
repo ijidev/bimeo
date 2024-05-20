@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Withdrawal;
 use Laratrust\Models\Role;
+use App\Models\Transaction;
 use App\Models\UserPayment;
 use App\Models\UserProduct;
 use Illuminate\Support\Str;
@@ -148,6 +149,12 @@ class DashboardController extends Controller
             $notif->massage = 'Your Account has been recharged with $'.$request->amount;
             $notif->user_id = $user->id;
             $notif->save();
+
+            $trans = new Transaction;
+            $trans->type = 'recharge' ;
+            $trans->user_id = $user->id ;
+            $trans->amount = $request->amount ;
+            $trans->save();
 
             return back()->with('success', 'User Balance toped up with $'. $request->amount);
         }

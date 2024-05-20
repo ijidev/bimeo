@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/Event', 'event')->name('event');
         Route::get('/certificate', 'cert')->name('cert');
         Route::get('/faqs', 'faq')->name('faqs');
+        Route::get('/ref', 'ref')->name('ref');
         Route::get('/company', 'company')->name('company');
         Route::get('/contact-us', 'contact')->name('contact');
         Route::get('/notification', 'notify')->name('notify');

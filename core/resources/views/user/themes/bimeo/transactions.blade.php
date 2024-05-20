@@ -1,40 +1,59 @@
 @extends('user.themes.bimeo.layouts.base')
 
 @section('content')
-    <div class="content-bg-top" style="padding-top: 54px;margin-top: 0;text-align:center;">
-      <!-- style="padding-top: 54px;margin-top: 0;position: absolute;top: 0;bottom: 0;left: 0;right: 0"> -->
-        <div class=" my-browser-flex my-browser-flex-nowrap ">
-          
+    <div class="container">
+        @foreach ($transactions as $trans)
+            <div style="background:#112; text:black; padding:0 10px; margin:0px; border-radius:10px;">
+                <div class="card-heade bg-none">
+                    <div class="row">
+                        <div class="col record-padding" style="">
+                            <p class=""><span style="display: flex; font-size: 12px;"></span>
+                            </p>
+                        </div>
+                        <div class="col-auto record-padding">
+                            <div class="card-footer" >
 
-            <div style="width: 100%;height: 1px;" class="split-line-withdraw"></div>
-            <div style="" class="">
+                                {{-- status --}}
+                                <div class="row">
+                                    <div class="col record-padding" style="color:blue; text-align:center;">
+                                        <div class="customer-define-colo text-center" style="color:white;"> Type </div>
+                                        
+                                        <div class="customer-define-colo text-center" style="color:white;">{{ $trans->type }}</div>
+                                        
+                                    </div>
+                                </div>
 
-              <div class="deposit-page-item-bg">
-                <div class=" bg-none">
-                  <div class=" my-browser-flex my-browser-flex-nowrap ">
-                    <div class="col record-padding" style="">
-                      <p class="withdraw-title-color">2024-04-18 15:46:34</p>
+                                <div class="row" style="text-align:center;">
+                                    <div class="col-auto">
+                                        <div class="customer-define-color text-center">Amount</div>
+                                        
+                                        <div class="text-right text-center">$ {{ $trans->amount }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="text-align:center;">
+                                    <div class="col-auto">
+                                        <div class="customer-define-color text-center">Date</div>
+                                        
+                                        <div class="text-right text-center">{{ $trans->created_at }}</div>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="mt-2" style="width: 100px;;">
+                                    
+                                </div> --}}
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="form-control-title-color position-relative">
-                  <div class="media  my-browser-flex my-browser-flex-nowrap "
-                    style="flex-direction: column;padding-top: 15px;padding-bottom: 15px;">
-                    <div class="mr-3 rounded image-container" style="">Subordinate rebate</div>
-                  </div>
-                </div>
-                <div class=" my-browser-flex my-browser-flex-nowrap ">
-                  <div class="col record-padding">
-                    <p class="withdraw-title-color">31.33 USD </p>
-                  </div>
-                </div>
-              </div>
 
-            
-              <div style="width: 100%;height: 1px;" class="split-line-withdraw"></div>
+                <hr>
+
+               
+
+                </div>
             </div>
-          </div>
-        </div>
+        @endforeach
+
     </div>
- 
 @endsection

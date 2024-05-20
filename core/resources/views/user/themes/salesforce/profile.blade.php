@@ -26,7 +26,7 @@
                         
                         <div class="input-group mb-4">
                             <span class="input-group-text" id="my-addon">Member-ID</span>
-                            <input class="form-control" type="text" id="memberId" disabled value="{{' '. $user->ref_id }}"  aria-describedby="my-addon">
+                            <input class="form-control" type="text" id="memberId" disabled value="{{ $user->ref_id }}"  aria-describedby="my-addon">
                             <div class="input-group-append">
                                 <button class="input-group-text btn btn-info text-white" onclick="myFunction()"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
                             </div>

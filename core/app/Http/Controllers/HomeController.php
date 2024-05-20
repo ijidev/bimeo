@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Withdrawal;
 use App\Models\PaymentInfo;
+use App\Models\Transaction;
 use App\Models\UserPayment;
 use App\Models\UserProduct;
 use App\Models\Notification;
@@ -80,6 +81,12 @@ class HomeController extends Controller
             }
         }
         
+    }
+
+    public function ref(){
+        $theme_path = Setting::first()->theme_path;
+
+        return view($theme_path . 'ref');
     }
 
     public function terms(){
@@ -284,7 +291,18 @@ class HomeController extends Controller
                 $user->parent->balance += $ref_amt;
                 $user->parent->asset += $ref_amt;
                 $user->parent->update();
+            
+                $trans = new Transaction;
+                $trans->type = 'rebate' ;
+                $trans->amount = $ref_amt ;
+                $trans->user_id = $user->parent->id ;
+                $trans->save();
 
+                $trans = new Transaction;
+                $trans->type = 'commission' ;
+                $trans->user_id = $user->id ;
+                $trans->amount = $prof * $combo ;
+                $trans->save();
 
             return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
         }
@@ -347,6 +365,18 @@ class HomeController extends Controller
             $user->parent->balance += $ref_amt;
             $user->parent->asset += $ref_amt;
             $user->parent->update();
+
+            $trans = new Transaction;
+                $trans->type = 'rebate' ;
+                $trans->amount = $ref_amt ;
+                $trans->user_id = $user->parent->id ;
+            $trans->save();
+
+            $trans = new Transaction;
+                $trans->type = 'commission' ;
+                $trans->user_id = $user->id ;
+                $trans->amount = $prof * $combo ;
+            $trans->save();
             
          //   if($user->tier->name == "Normal"){
             
@@ -456,8 +486,9 @@ class HomeController extends Controller
 
     public function transctions(){
         $theme_path = Setting::first()->theme_path;
-
-        return view($theme_path . 'transactions');
+        $transactions = transaction::where('user_id' , Auth::user()->id)->get();
+        // dd($transactions);
+        return view($theme_path . 'transactions', compact('transactions'));
     }
 
     public function setting(){

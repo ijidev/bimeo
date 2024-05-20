@@ -58,11 +58,11 @@
                 </div>
                 <p class="small mt-2">Withdrawal</p>
             </a>
-            <a href="{{ route('upline') }}" class="text-center actin-icon">
+            <a href="{{ route('ref') }}" class="text-center actin-icon">
                 <div class="avatar form-group-bg form-group-bg-shadow" style="border-radius:10px;padding: 15px;">
                     <img src="{{ asset('bimeoassets/images/home_invit.png') }}" class="avatar-30">
                 </div>
-                <p class="small mt-2">My Team</p>
+                <p class="small mt-2">Referal</p>
             </a>
         </div>
         <div class=" my-browser-flex my-browser-flex-nowrap  ele-space-between" style="margin-top: 35px;">
