@@ -111,12 +111,8 @@
                     <div class="row">
                         <div class="col-auto">
                             <div class="customer-define-color text-center">Commission</div>
-                            <div class="text-right text-center"> 
-                                @if($record->price == null)
-                                    {{ $record->product->price / 100 * Auth::user()->tier->percent }} USD
-                                @else
-                                    {{ $record->price / 100 * Auth::user()->tier->percent * 10}} USD
-                                @endif
+                            <div class="text-right text-center">
+                                    {{ $record->profit }} USD
                             </div>
                         </div>
                     </div>

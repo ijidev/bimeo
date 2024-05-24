@@ -24,17 +24,18 @@
                                     $combo ;
                                     // $combo_text ;
                                 @endphp
-                                @forelse($userProduct->where('product_id',$product->id) as $userP)
+                                @if ($userProduct->count() > 0)
                                     @php
-                                        $price = $userP->price; 
-                                        $combo = 10;
+                                        $price = $userProduct->sum('price'); 
+                                        $combo = 6;
                                     @endphp
-                                @empty
+                                @else
                                     @php
                                         $price =  $product->price; 
                                         $combo = 1;
                                     @endphp
-                                @endforelse
+                                @endif
+                                
                                 
                                 <div class="mb-0 font-weight-normal my-browser-flex-item-value-color"> {{ $price }} USD </div>
                                 <p class="profile-my-balance-title" style="margin-top: 6px">Total Amount</p>
@@ -45,7 +46,7 @@
                     <div class="card-body profile-balance-title-content" style="width: 50%">
                         <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
                             <div class="col"  style="text-align: center">
-                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color">{{ $combo * ($price / 100 * Auth::user()->tier->percent)  }} USD </div>
+                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color">{{ $combo * ($price / 100 * Auth::user()->tier->percent) }} USD </div>
                                 <p class="profile-my-balance-title" style="margin-top: 8px">Profit</p>
                             </div>
                         </div>
@@ -62,9 +63,9 @@
                     <strong>Rating No.</strong> <br>
                     {{  uniqId(5) }}
 
-                    @php
+                    {{-- @php
                         echo uniqId(5)
-                    @endphp
+                    @endphp --}}
                     
                 </div>
             </div>
@@ -81,6 +82,7 @@
                     <form action="{{ route('submit.review',$product->id) }}">
 
                         <Input name="r_id" value="{{ $r_id }}" hidden>
+                        <Input name="pair_id" value="{{ $userProduct->first()->pair_id }}" hidden>
                      
                         <div class="text-center">
                             <strong>Rate Us Now</strong> <br>

@@ -191,32 +191,45 @@ class HomeController extends Controller
                 $currentIndex = Auth::user()->optimized;
 
                 // Fetch products ordered by serial or any other field
-                $product = Product::where('tier_id',Auth::user()->tier_id);
+                $products = Product::where('tier_id',Auth::user()->tier_id);
                          
                 
-                if($product->count() <= 0){
+                if($products->count() <= 0){
                     return back()->with('error', 'No Product currently available to optimize');
                 }else{
-                    $product = $product->orderBy('id')->skip($currentIndex)->first();
+                    $product = $products->orderBy('id')->skip($currentIndex)->first();
                     // Increment the index for the next request
                     $currentIndex = ($currentIndex + 1) % Product::where('tier_id',Auth::user()->tier_id)->count();
                     // Session::put('current_product_index', $currentIndex);
                     // dd($product->price = 2);
-                    $userProduct = UserProduct::where('user_id', Auth::user()->id)->get();
-                    $review = new ProductReview();
-                    $review->product_id = $product->id;
-                    $review->user_id = $user->id;
-                    $review->status = 'pending';
+
+                    $userProducts = UserProduct::where('user_id', Auth::user()->id)->where('product_id', $product->id)->get()->first();
+                    $userProduct = $userProducts->where('pair_id', $userProducts->pair_id)->get();
+                    // dd($userProduct);
                     
-                    foreach($userProduct->where('product_id', $product->id) as $p){
-                        // dd($p);
-                        $review->price = $p->price; 
+                    if ($userProduct->count() > 0) {
+                        foreach ($userProduct as $uproduct) {
+                            $review = new ProductReview();
+                            $review->product_id = $uproduct->product_id;
+                            $review->user_id = $user->id;
+                            $review->pair_id = $uproduct->pair_id;
+                            $review->profit = 6 * ($product->price / 100) * Auth::user()->tier->percent;
+                            $review->status = 'pending';
+                            $review->save();
+                            // $r_id = ProductReview::where('product_id', $userProduct->last()->id)->get()->first()->id;
+                            $r_id = $review->id ;
+                        }
+                    } else {
+                        $review = new ProductReview();
+                        $review->product_id = $product->id;
+                        $review->user_id = $user->id;
+                        $review->status = 'pending';
+                        $review->profit = ($product->price / 100) * Auth::user()->tier->percent;
+                        $review->save();
+                        $r_id = $review->id ;
                     }
-        
-                    // dd($review);
-                    $review->save();
-                    $r_id = $review->id ;
                     
+                    // dd($r_id);
                     return view($theme_path . 'review',compact('product', 'r_id', 'userProduct'));
                     # code...
                 }
@@ -240,73 +253,75 @@ class HomeController extends Controller
         return view($theme_path . 'withdraw-pass');
     }
 
-     public function submit($id)
-     {
+    public function submit($id)
+    {
 
-        $set = Setting::get()->first();
-        $user = Auth::user();
-        $theme_path = $set->theme_path;
+    $set = Setting::get()->first();
+    $user = Auth::user();
+    $theme_path = $set->theme_path;
 
-        $review = ProductReview::findOrFail($id);
-        $product = $review->product;
-        $combo = 1;
-        $userProduct = UserProduct::where('user_id', Auth::user()->id)
-                            ->where('product_id',$product->id)->get();
-        if($userProduct->count() > 0){
-            $product->price = $userProduct->first()->price ;
-            $combo = 10;
-        }
-        // dd($product->price);
+    $review = ProductReview::findOrFail($id);
+    $product = $review->product;
+    $combo = 1;
+    $userProduct = UserProduct::where('user_id', Auth::user()->id)
+                        ->where('product_id',$product->id)->get();
+    if($userProduct->count() > 0){
+        // $product->price = $userProduct->first()->price ;
+        $combo = 6;
         
-        if ($product->price > $user->asset) {
-
-            $review->status = 'pending';
+    }
+    // dd($product->price);
     
-            // dd($review);
-            $review->update();
+    // if insuficient balance
+    if ($product->price > $user->asset) {
 
-            $user->frozen += $user->asset;
-            $user->asset = $user->asset - $product->price;
-            // dd($user->asset);
-            $user->update();
+        $review->status = 'pending';
 
-            return redirect()->route('getstarted')->with('error','Insuficient balance, Please top up your account to continue review or contact support');
+        // dd($review);
+        $review->update();
 
-        } else {
- 
-            $review->status = 'approved';
-    
-             
-            $review->save();
-            $prof = ($product->price / 100) * $user->tier->percent ;
-            $user->balance += $prof * $combo;
-            $user->asset += $prof * $combo ;
-            $user->optimized += 1 ;
-            $user->total_optimized += 1 ;
-            //dd($prof, $prof *$combo ,$product->price);
-            $user->update();
+        $user->frozen += $user->asset;
+        $user->asset = $user->asset - $product->price;
+        // dd($user->asset);
+        $user->update();
+
+        return redirect()->route('getstarted')->with('error','Insuficient balance, Please top up your account to continue review or contact support');
+
+    } else {
+
+        $review->status = 'approved';
+
             
-             $product_profit = $prof * $combo;
-                $ref_amt = ($product_profit / 100 ) * $set->ref_amount;
-                $user->parent->balance += $ref_amt;
-                $user->parent->asset += $ref_amt;
-                $user->parent->update();
-            
-                $trans = new Transaction;
-                $trans->type = 'rebate' ;
-                $trans->amount = $ref_amt ;
-                $trans->user_id = $user->parent->id ;
-                $trans->save();
+        $review->save();
+        $prof = ($product->price / 100) * $user->tier->percent ;
+        $user->balance += $prof * $combo;
+        $user->asset += $prof * $combo ;
+        $user->optimized += 1 ;
+        $user->total_optimized += 1 ;
+        //dd($prof, $prof *$combo ,$product->price);
+        $user->update();
+        
+            $product_profit = $prof * $combo;
+            $ref_amt = ($product_profit / 100 ) * $set->ref_amount;
+            $user->parent->balance += $ref_amt;
+            $user->parent->asset += $ref_amt;
+            $user->parent->update();
+        
+            $trans = new Transaction;
+            $trans->type = 'rebate' ;
+            $trans->amount = $ref_amt ;
+            $trans->user_id = $user->parent->id ;
+            $trans->save();
 
-                $trans = new Transaction;
-                $trans->type = 'commission' ;
-                $trans->user_id = $user->id ;
-                $trans->amount = $prof * $combo ;
-                $trans->save();
+            $trans = new Transaction;
+            $trans->type = 'commission' ;
+            $trans->user_id = $user->id ;
+            $trans->amount = $prof * $combo ;
+            $trans->save();
 
-            return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
-        }
-     }
+        return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
+    }
+    }
 
     public function review(Request $request, $id)
     {
@@ -314,83 +329,149 @@ class HomeController extends Controller
         $theme_path = $set->theme_path;
         $product = Product::findOrFail($id);
         $user = Auth::user();
-        $review = ProductReview::where('id' , $request->r_id)->get()->first();
         $combo = 1;
-        $userProduct = UserProduct::where('user_id', Auth::user()->id)
-                            ->where('product_id',$product->id)->get();
+
+        $userProduct = UserProduct::where('pair_id', $request->pair_id)
+                            ->where('user_id', Auth::user()->id)->get();
+                     
         if($userProduct->count() > 0){
-            $product->price = $userProduct->first()->price ;
-            $combo = 10;
-        }
-         //dd($review);
-        if ($product->price > $user->asset) {
+            // $product->price = $userProduct->first()->price ;
+            $combo = 6;
+            $reviews = ProductReview::where('pair_id' , $request->pair_id)->where('status', 'pending')->get();
+            // $reviews = ProductReview::where('pair_id' , 4)->where('status', 'pending')->get();
 
-            $review->product_id = $product->id;
-            $review->user_id = $user->id;
-            $review->rating = $request->rating;
-            $review->comment = $request->comment;
-            $review->status = 'pending';
+            // $combo_product = $userProduct->first();
+            // dd($reviews->where('status','pending')->count());
+            while ($reviews->where('status','pending')->count() > 0) {
+                foreach ($reviews as $review) {
+                    // dd($review->product->price);
+                    // if insuficient balance
+                    if ($review->product->price > $user->asset) {
+            
+                        $review->status = 'pending';
+                        $review->update();
+            
+                        $user->frozen += $user->asset;
+                        $user->asset = $user->asset - $review->product->price;
+                        // dd($user->asset);
+                        $user->update();
+            
+                        return redirect()->route('getstarted')->with('error','Insuficient balance, Please top up your account to continue review or contact support');
+                    } 
+                    else {
+                         
+                        // foreach ($reviews as $review) {
+                        
+                            $review->status = 'approved';
+                            $review->save();
+                            
+                            $profit = ($product->price / 100) * $user->tier->percent * $combo;
+                            // dd($profit);
+        
+                            $user->balance += $profit;
+                            $user->asset += $profit;
+                            $user->optimized += 1 ;
+                            $user->total_optimized += 1 ;
+                            $user->update();
+                            
+                            //  $product_profit = $profit;
+                            $ref_amt = ($profit / 100 ) * $set->ref_amount;
+                            $user->parent->balance += $ref_amt;
+                            $user->parent->asset += $ref_amt;
+                            $user->parent->update();
+                            
+                            $trans = new Transaction;
+                                $trans->type = 'rebate' ;
+                                $trans->amount = $ref_amt ;
+                                $trans->user_id = $user->parent->id ;
+                            $trans->save();
+                
+                            $trans = new Transaction;
+                                $trans->type = 'commission' ;
+                                $trans->user_id = $user->id ;
+                                $trans->amount = $profit ;
+                            $trans->save();
+                        // }
     
-            // dd($review);
-            $review->update();
-
-            $user->frozen += $user->asset;
-            $user->asset = $user->asset - $product->price;
-            
-            $user->update();
-
-            return redirect()->route('getstarted')->with('error','Insuficient balance, Please top up your account to continue review or contact support');
-
-        } else {
-    
-            $review->product_id = $product->id;
-            $review->user_id = $user->id;
-            $review->rating = $request->rating;
-            $review->comment = $request->comment;
-            $review->status = 'approved';
-    
-            // dd($review);
-            $review->save();
-
-            $prof = ($product->price / 100) * $user->tier->percent ;
-            $user->balance += $prof * $combo;
-            $user->asset += $prof * $combo;
-            $user->optimized += 1 ;
-            $user->total_optimized += 1 ;
-            
-            $user->update();
-            
-            $product_profit = $prof * $combo;
-            $ref_amt = ($product_profit / 100 ) * $set->ref_amount;
-            $user->parent->balance += $ref_amt;
-            $user->parent->asset += $ref_amt;
-            $user->parent->update();
-
-            $trans = new Transaction;
-                $trans->type = 'rebate' ;
-                $trans->amount = $ref_amt ;
-                $trans->user_id = $user->parent->id ;
-            $trans->save();
-
-            $trans = new Transaction;
-                $trans->type = 'commission' ;
-                $trans->user_id = $user->id ;
-                $trans->amount = $prof * $combo ;
-            $trans->save();
-            
-         //   if($user->tier->name == "Normal"){
-            
-           // if($user->bonus_ispaid == false){
-           //     if($user->optimized == $user->tier->daily_optimize){
-           //         $user->asset+= 20 ;
-           //         $user->bonus_ispaid = true;
-           //         $user->update();
-           //         return redirect()->route('getstarted')->with('success', 'you\'ve been rewarded with 20 eruo welcome bonus for completing your first optimization set of '. $user->optimized . '/'. $user->tier->daily_optimize);
-              //  }
-          //  }}
+                    }
+                }
+                $userProduct->delete();
                 return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
-            
+            }
+        }
+        else{
+            $review = ProductReview::where('id' , $request->r_id)->get()->first();
 
+            // dd();
+           if ($review->product->price > $user->asset) {
+   
+               $review->product_id = $product->id;
+               $review->user_id = $user->id;
+               $review->rating = $request->rating;
+               $review->comment = $request->comment;
+               $review->status = 'pending';
+       
+               // dd($review);
+               $review->update();
+   
+               $user->frozen += $user->asset;
+               $user->asset = $user->asset - $product->price;
+               
+               $user->update();
+   
+               return redirect()->route('getstarted')->with('error','Insuficient balance, Please top up your account to continue review or contact support');
+   
+           } else {
+       
+               $review->product_id = $product->id;
+               $review->user_id = $user->id;
+               $review->rating = $request->rating;
+               $review->comment = $request->comment;
+               $review->status = 'approved';
+       
+               // dd($review);
+               $review->save();
+   
+               $prof = ($product->price / 100) * $user->tier->percent ;
+               $user->balance += $prof * $combo;
+               $user->asset += $prof * $combo;
+               $user->optimized += 1 ;
+               $user->total_optimized += 1 ;
+               
+               $user->update();
+               
+               $product_profit = $prof * $combo;
+               $ref_amt = ($product_profit / 100 ) * $set->ref_amount;
+               $user->parent->balance += $ref_amt;
+               $user->parent->asset += $ref_amt;
+               $user->parent->update();
+   
+               $trans = new Transaction;
+                   $trans->type = 'rebate' ;
+                   $trans->amount = $ref_amt ;
+                   $trans->user_id = $user->parent->id ;
+               $trans->save();
+   
+               $trans = new Transaction;
+                   $trans->type = 'commission' ;
+                   $trans->user_id = $user->id ;
+                   $trans->amount = $prof * $combo ;
+               $trans->save();
+               
+            //   if($user->tier->name == "Normal"){
+               
+              // if($user->bonus_ispaid == false){
+              //     if($user->optimized == $user->tier->daily_optimize){
+              //         $user->asset+= 20 ;
+              //         $user->bonus_ispaid = true;
+              //         $user->update();
+              //         return redirect()->route('getstarted')->with('success', 'you\'ve been rewarded with 20 eruo welcome bonus for completing your first optimization set of '. $user->optimized . '/'. $user->tier->daily_optimize);
+                 //  }
+             //  }}
+                   return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
+               
+   
+           }
         }
         
     }

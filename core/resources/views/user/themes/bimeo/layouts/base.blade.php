@@ -137,6 +137,7 @@
             @endif
         </div>
     </div>
+    {{-- {{dd(Route::is('info'))}} --}}
 
     @yield('content')
 
@@ -147,28 +148,28 @@
                 <div class="row no-gutters my-browser-flex my-browser-flex-space-between">
                     <div class="col-menu my-browser-flex-cente">
                         <a href="{{ route('home') }}" style="border-radius:0;"
-                            class="btn profile-balance-title-content  active">
+                            class="btn profile-balance-title-content @if(Route::is('home')) active @endif">
                             <img class="material-icons" src="{{ asset('bimeoassets/images/foot-home.png') }}">
                             <p class="footer-text-color" style="margin-top: 5px;">Home</p>
                         </a>
                     </div>
                     <div class="col-menu text-cente">
                         <a href="{{ route('getstarted') }}" style="border-radius:0;"
-                            class="btn profile-balance-title-content ">
+                            class="btn profile-balance-title-content @if(Route::is('getstarted')) active @endif">
                             <img class="material-icons" src="{{ asset('bimeoassets/images/home_start.png') }}">
                             <p class="footer-text-color" style="margin-top: 5px;">Starting</p>
                         </a>
                     </div>
                     <div class="col-menu text-cente">
                         <a href="{{ route('record') }}" style="border-radius:0;"
-                            class="btn profile-balance-title-content ">
+                            class="btn profile-balance-title-content @if(Route::is('record')) active @endif">
                             <img class="material-icons" src="{{ asset('bimeoassets/images/home_records.png') }}">
                             <p class="footer-text-color" style="margin-top: 5px;">Records</p>
                         </a>
                     </div>
                     <div class="col-menu text-cente">
                         <a href="{{ route('profile') }}" style="border-radius:0;"
-                            class="btn profile-balance-title-content ">
+                            class="btn profile-balance-title-content @if(Route::is('profile')) active @endif">
                             <img class="material-icons" src="{{ asset('bimeoassets/images/profile.png') }}">
                             <p class="footer-text-color" style="margin-top: 5px;">Profile</p>
                         </a>

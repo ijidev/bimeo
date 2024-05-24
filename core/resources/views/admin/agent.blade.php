@@ -86,7 +86,7 @@
                             <div class="dropdown">
                                 <button id="my-dropdown" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</button>
                                 <div class="dropdown-menu" aria-labelledby="my-dropdown">
-                                    <a class="dropdown-item" href="{{ route('user', $user->id) }}">Manage</a>
+                                    <a class="dropdown-item" href="{{ route('admin.agent.view', $user->id) }}">Manage</a>
                                     {{-- <a class="dropdown-item" href="{{ route('reset', $user->id) }}">Reset</a> --}}
                                     <a class="dropdown-item" href="{{ route('delete.user', $user->id) }}">Delete</a>
                                 </div>
