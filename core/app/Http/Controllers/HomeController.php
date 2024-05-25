@@ -142,10 +142,10 @@ class HomeController extends Controller
         // dd('opening time '.$open_time->format('H') , "current time " . date('H'), 'closing time ' . $close_time->format('H'));
          
         // dd($user->tier->daily_optimize);
-        // if ($current_time >= $close_time->format('H')) 
-        // {
-        //     return back()->with('error','Active hour passed try again between '. $set->active_hour . ' & ' . $set->close_hour);
-        // } 
+        if ($current_time >= $close_time->format('H')) 
+        {
+            return back()->with('error','Active hour passed try again between '. $set->active_hour . ' & ' . $set->close_hour);
+        } 
 
         if ($current_time < $open_time->format('H')) 
         {
@@ -700,23 +700,36 @@ class HomeController extends Controller
     public function info()
     {
         $theme_path = Setting::first()->theme_path;
-        $infos = UserPayment::where('user_id', Auth::user()->id)->get();
-        return view($theme_path . 'paymentinfo', compact('infos'));
+        $title = "Crypto Wallet";
+        $wallet = "wallet (TRC20, ERC20)";
+        $address = "wallet Address";
+        $type = "crypto";
+        $infos = UserPayment::where('user_id', Auth::user()->id)->where('type','crypto')->get();
+        return view($theme_path . 'paymentinfo', compact('infos','title','wallet', 'address', 'type'));
+    }
+    public function bank()
+    {
+        $theme_path = Setting::first()->theme_path;
+        $title = "Wire Transfar";
+        $address = "Bank Account";
+        $wallet = "Bank Name";
+        $type = "bank";
+        $infos = UserPayment::where('user_id', Auth::user()->id)->where('type','bank')->get();
+        return view($theme_path . 'paymentinfo', compact('infos','title','wallet', 'address' , 'type'));
     }
     
     public function AddInfo(Request $request)
     {
+        // dd($request->type);
         if($request->password == Auth::user()->withdrawal_pass)
         {
                 $info = new UserPayment();
                 $info->user_id = Auth::user()->id;
 
                 $info->wallet = $request->wallet;
+                $info->type = $request->type;
                 $info->address = $request->address;
-                // $info->recipient = $request->recipient;
                 $info->phone = $request->phone;
-                $info->bank = $request->bank;
-                $info->account = $request->account;
                 $info->recipient = $request->recipient;
                 $info->save();
             
@@ -753,9 +766,30 @@ class HomeController extends Controller
                 $info->wallet = $request->wallet;
                 $info->address = $request->address;
                 $info->phone = $request->phone;
+                $info->recipient = $request->recipient;
+                $info->update();
+            }
             
-                $info->account = $request->account;
-                $info->bank = $request->bank;
+            
+
+            return back()->with('success', 'Payment Info Updated successfuly');
+        }else{
+            return back()->with('error', 'invalid withdrawal Password');
+        }
+    
+    }
+
+    public function storeBank(Request $request, $id)
+    {
+        if($request->password == Auth::user()->withdrawal_pass)
+        {
+            if ($request->wallet != null) {
+                # code...
+                $info = UserPayment::find($id);
+                $info->user_id = Auth::user()->id;
+                $info->wallet = $request->wallet;
+                $info->address = $request->address;
+                $info->phone = $request->phone;
                 $info->recipient = $request->recipient;
                 $info->update();
             }

@@ -37,7 +37,7 @@
                             <div class="edit-pwd-title-color" style="padding-left: 20px;">Payment Methold</div>
                                 <select id="my-select" class="form-control " style="height: 20px;" name="wallet">
                                     @foreach($wallets as $wallet)
-                                    <option value="{{ $wallet->id }}">{{ $wallet->wallet }}</option>
+                                        <option value="{{ $wallet->id }}">{{ $wallet->type }}</option>
                                     @endforeach
                                 </select>
                         </div>

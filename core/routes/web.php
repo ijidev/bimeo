@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/update', 'update')->name('user.store');
         
         Route::get('/info', 'info')->name('info');
+        Route::get('/bank', 'bank')->name('bank');
         Route::get('/add-info', 'AddInfo')->name('info.add');
         Route::get('/update-info/{id}', 'StoreInfo')->name('info.store');
         Route::get('/delete-info/{id}', 'RemoveInfo')->name('info.remove');
