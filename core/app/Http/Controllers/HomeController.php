@@ -142,12 +142,12 @@ class HomeController extends Controller
         // dd('opening time '.$open_time->format('H') , "current time " . date('H'), 'closing time ' . $close_time->format('H'));
          
         // dd($user->tier->daily_optimize);
-        if ($current_time >= $close_time->format('H')) 
-        {
-            return back()->with('error','Active hour passed try again between '. $set->active_hour . ' & ' . $set->close_hour);
-        } 
+        // if ($current_time >= $close_time->format('H')) 
+        // {
+        //     return back()->with('error','Active hour passed try again between '. $set->active_hour . ' & ' . $set->close_hour);
+        // } 
 
-        elseif ($current_time < $open_time->format('H')) 
+        if ($current_time < $open_time->format('H')) 
         {
             return back()->with('error','Active hour passed try again between '. $set->active_hour . ' & ' . $set->close_hour);
         }
@@ -395,7 +395,10 @@ class HomeController extends Controller
     
                     }
                 }
-                $userProduct->delete();
+                foreach ($userProduct as $product) {
+                    # delete user product after optimized...
+                    $product->delete();
+                }
                 return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
             }
         }

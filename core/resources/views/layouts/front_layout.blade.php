@@ -11,6 +11,8 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/css/components.css') }}">
+  <link rel="stylesheet" href="{{ asset('asset/bundles/select2/dist/css/select2.min.css')}}">
+
   <!-- Custom style CSS -->
   <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
   <link rel="stylesheet" href="{{ asset('asset/css/custom.css') }}">
@@ -90,6 +92,8 @@
   <script src="{{ asset('asset/js/page/index.js') }}"></script>
   <!-- Template JS File -->
   <script src="{{ asset('asset/js/scripts.js') }}"></script>
+  <script src="{{ asset('asset/bundles/select2/dist/js/select2.full.min.js')}}"></script>
+
   <!-- Custom JS File -->
   <script src="{{ asset('asset/js/custom.js') }}"></script>
 </body>

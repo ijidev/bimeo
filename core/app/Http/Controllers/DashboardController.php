@@ -69,39 +69,46 @@ class DashboardController extends Controller
     
     public function bindproduct(Request $request)
     {
-        $prod = Product::find($request->productId);
-        $userProduct = UserProduct::where('product_id', $prod->id)
-                    ->where('user_id', $request->userId)->get();
+        $products = Product::whereIn('id',$request->productId)->get();
+        $pair_id = uniqId() ;
+        // dd($products);
+        // $userProduct = UserProduct::where('product_id', $prod->id)
+        //             ->where('user_id', $request->userId)->get();
          
-        if($userProduct->count() > 0){
-            // dd("product exist");
+        // if($userProduct->count() > 0){
+        //     // dd("product exist");
             
-            $product = UserProduct::findOrFail($userProduct->first()->id);
+        //     $product = UserProduct::findOrFail($userProduct->first()->id);
             
-            $product->product_id = $prod->id;
-            $product->user_id = $request->userId;
-            if($request->price !== null){
-                $product->price = $request->price;
-            }else{
-                $product->price = $prod->price;
+        //     $product->product_id = $prod->id;
+        //     $product->user_id = $request->userId;
+        //     if($request->price !== null){
+        //         $product->price = $request->price;
+        //     }else{
+        //         $product->price = $prod->price;
+        //     }
+        //     $product->update();
+        //     return back()->with('success',$product->product->name .' Updated successfuly');
+            
+        // }else{
+            // dd($prod);
+
+            foreach ($products as $item) {
+                
+                $user_product = new UserProduct();
+                $user_product->product_id = $item->id;
+                $user_product->user_id = $request->userId;
+                $user_product->pair_id = $pair_id;
+                if($request->price != null){
+                    $user_product->price = $request->price;
+                }else{
+                    $user_product->price = $item->price;
+                }
+                // dd($user_product);
+                $user_product->save();
             }
-            $product->update();
-            return back()->with('success',$product->product->name .' Updated successfuly');
-            
-        }else{
-            // dd("product do not exist");
-            $product = new UserProduct();
-            $product->product_id = $prod->id;
-            $product->user_id = $request->userId;
-            if($request->price != null){
-                $product->price = $request->price;
-            }else{
-                $product->price = $prod->price;
-            }
-            // dd($product);
-            $product->save();
-            return back()->with('success',$product->product->name .' Binded to user successfuly');
-        }
+            return back()->with('Products Binded to user successfuly');
+        // }
     }
     
     public function userProduct($id)
