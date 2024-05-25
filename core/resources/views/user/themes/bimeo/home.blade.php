@@ -18,6 +18,11 @@
                     rewards! Please contact our customer service to find out more!</div>
             </div>
         </div>
+        <div class="video">
+            <video height="240px" width="100%" autoplay="autoplay" loop="loop" muted="muted">
+                <source src=" {{ asset('bimeoassets/images/bimeo.mp4') }}" type="video/mp4">
+            </video>
+        </div>
         <br>
         <div class="container" style="margin-top: 10px;">
             <div class="card-body" style="padding-top: 0;padding-bottom: 0;">

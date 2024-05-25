@@ -73,7 +73,7 @@ class AgentController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'username' => $data['name'],
-           'type' => 'agent',
+            'type' => 'agent',
             'user_id' => $parent,
             'ref_id' => $uniqueCode,
             'tier_id' => $tier->id,
@@ -82,6 +82,7 @@ class AgentController extends Controller
             // 'withdrawal_pass' => $data['withdrawal_password'],
             'password' => Hash::make($data['password']),
         ]);
+        dd($user);
         $user->addRole('agent');
         // $user = $user->update([
         //     'ref_id' => 'ref_'. 0 .$user->id
