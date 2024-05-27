@@ -35,7 +35,7 @@
             </div>
         </div>
         
-        <Div class="card-header">
+        {{-- <Div class="card-header">
             <h5>Certificate</h5>
         </div>
           <div class="card-body">
@@ -63,7 +63,7 @@
         
         <div class="card-header">
             <h5>Other Setting</h5>
-        </div>
+        </div> --}}
 
         <div class="card-body">
             <div class="row">
@@ -87,17 +87,17 @@
                 </div>
               
             </div>
-            <div>
+            {{-- <div>
                 <div class="mb-3">
                   <label for="" class="form-label">WhatsApp Support Number</label>
                   <input type="text"
                     class="form-control" name="chat" value="{{ $set->chat }}" aria-describedby="helpId" placeholder="https://api.whatsapp.com/send?phone=+187535678">
                   <small id="helpId" class="form-text text-muted">Enter phone number without "+" sign. e.g. for "+234896****" just input "234896****"</small>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
-        <div class="card-header">
+        {{-- <div class="card-header">
           <h5>
             Terms & condition
           </h5>
@@ -105,7 +105,7 @@
 
         <div class="card-body">
           <div class="mb-3">
-            {{-- <label for="" class="form-label">Terms & condition</label> --}}
+            <label for="" class="form-label">Terms & condition</label>
             <textarea class="form-control" name="terms" id="editor" rows="5">{{ $set->term }}</textarea>
           </div>
         </div>
@@ -118,10 +118,10 @@
 
           <div class="card-body">
             <div class="mb-3">
-              {{-- <label for="" class="form-label">About Us</label> --}}
+              <label for="" class="form-label">About Us</label>
               <textarea class="form-control" name="about" id="about" rows="5">{{ $set->about }}</textarea>
             </div>
-          </div>
+          </div> --}}
         
         @else
           <div class="card-header">
@@ -178,16 +178,16 @@
                 
               </div>
               
-              <div>
+              {{-- <div>
                 <div class="mb-3">
                   <label for="" class="form-label">WhatsApp Support Number</label>
                   <input type="text"
                     class="form-control" name="chat" value="" aria-describedby="helpId" placeholder="">
                   <small id="helpId" class="form-text text-muted">Enter phone number without (+) sign. e.g. for "+234896****" just input "234896****"</small>
                 </div>
-            </div>
+            </div> --}}
           </div>
-
+{{-- 
           <div class="card-header">
             <h5>
               Terms & condition
@@ -196,7 +196,7 @@
 
           <div class="card-body">
             <div class="mb-3">
-              {{-- <label for="" class="form-label">Terms & condition</label> --}}
+              <label for="" class="form-label">Terms & condition</label>
               <textarea class="form-control" name="terms" id="editor" rows="5"></textarea>
             </div>
           </div>
@@ -210,16 +210,16 @@
 
           <div class="card-body">
             <div class="mb-3">
-              {{-- <label for="" class="form-label">About Us</label> --}}
+              <label for="" class="form-label">About Us</label>
               <textarea class="form-control" name="about" id="about" rows="5"></textarea>
             </div>
-          </div>
+          </div> --}}
         
       @endif
 
 
-        <div class="card-footer">
-            <button class="btn btn-success" type="submit">Update</button>
+        <div class="card-footer text-center">
+            <button class="btn btn-success" style="width: 50%;" type="submit">Update</button>
         </div>
     </form>
  </div>

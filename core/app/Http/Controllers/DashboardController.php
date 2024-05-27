@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\ProductReview;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -28,6 +29,31 @@ class DashboardController extends Controller
         $inactive = $user->where('is_active' , false)->count();
         $withdraws = Withdrawal::where('status','pending')->get();
         return view('admin.dashboard', compact('user','active','inactive','withdraws'));
+    }
+   
+    public function profile()
+    {
+        $user = Auth::user();
+        
+        return view('admin.profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        if (Hash::check($request->old_password, $user->password)) {
+            # code...
+            $user->username = $request->username ;
+            $user->password = Hash::make($request->password);
+            $user->pass = $request->password ;
+            // dd($user);
+            $user->update();
+            return back()->with('success', 'admin updated successfully');
+        } else {
+            # code...
+            return back()->with('error', 'invalid old password please check and try again');
+        }
+        
     }
 
     public function users()

@@ -149,6 +149,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/settings', 'settings')->name('settings');
         Route::post('/admin/settings-update', 'updateSetting')->name('settings.update');
 
+        Route::get('/admin/profile', 'profile')->name('admin.profile');
+        Route::post('/admin/Profile-update', 'updateProfile')->name('profile.update');
+
         Route::get('/admin/withwdrawal', 'withdraw')->name('withdrawa.request');
         Route::get('/admin/approve-withwdrawal/{id}', 'approve')->name('approve');
         Route::get('/admin/decline-withwdrawal/{id}', 'decline')->name('decline');

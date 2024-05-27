@@ -11,11 +11,10 @@
                     style="margin-left: 10px;margin-right: 20px; width: 20px;height: 20px;z-index: 8">
             </div>
             <div style="margin-left: 20px;z-index: 7" class="run-container right-color">
-                <div style="z-index: 7" class="run-container-text" text="Dear" users,kindly="" participate=""
-                    in="" our="" latest="" event="" for="" more="" exclusive=""
-                    rewards!="" please="" contact="" customer="" service="" to="" find=""
-                    out="" more!="">Dear {{$user->name}},kindly participate in our latest event for more exclusive
-                    rewards! Please contact our customer service to find out more!</div>
+                <div style="z-index: 7" class="run-container-text">
+                    Dear {{$user->name}},kindly participate in our latest event for more exclusive
+                    rewards! Please contact our customer service to find out more!
+                </div>
             </div>
         </div>
         <div class="video">

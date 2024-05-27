@@ -135,6 +135,10 @@
           </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
             Activities
           </a> -->
+          <a href="{{ route('admin.profile') }}" class="dropdown-item has-icon"> <i class="fas fa-user"></i> 
+            Profile
+          </a>
+          <div class="dropdown-divider"></div>
           <a href="{{ route('settings') }}" class="dropdown-item has-icon"> <i class="fas fa-cog"></i> 
             Settings
           </a>
@@ -231,8 +235,8 @@
         <li><a class="nav-link" href="{{route('users')}}"><i data-feather="user"></i><span>Users</span></a></li>
         <li><a class="nav-link" href="{{route('admin.agent')}}"><i data-feather="user"></i><span>Agents</span></a></li>
         <li><a class="nav-link" href="{{route('withdrawa.request')}}"><i data-feather="file"></i><span>withwdrawal</span></a></li>
-        <li><a class="nav-link" href="{{route('deposit.request')}}"><i data-feather="file"></i><span>Deposit</span></a></li>
-        <li><a class="nav-link" href="{{route('faq')}}"><i data-feather="file"></i><span>FAQ</span></a></li>
+        {{-- <li><a class="nav-link" href="{{route('deposit.request')}}"><i data-feather="file"></i><span>Deposit</span></a></li>
+        <li><a class="nav-link" href="{{route('faq')}}"><i data-feather="file"></i><span>FAQ</span></a></li> --}}
         <li><a class="nav-link" href="{{route('settings')}}"><i data-feather="settings"></i><span>Settings</span></a></li>
         
         <!-- <li class="menu-header">Otika</li>
