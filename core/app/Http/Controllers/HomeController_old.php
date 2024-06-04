@@ -154,8 +154,8 @@ class HomeController extends Controller
         {
             return back()->with('error','The system is closed please try again between  '. $open_time->format('H:i') . ' & ' . $close_time->format('H:i') . ' current time is:' . $current_time);
         }
-        
-        else{
+        else
+        {
 
             if ($user->optimized >= $user->tier->daily_optimize) {
 
@@ -170,13 +170,13 @@ class HomeController extends Controller
                 // $parent->balance += $set->ref_amt;
                 // $parent->asset += $ref_amt;
                 // $parent->update();
-                return back()->with('error', 'you have completed the current set,please contact customer service for assistance.');
+                return back()->with('error', 'Optimiz daily limit reached contact Support to reset');
 
                 
             } 
             
             elseif ($user->asset < $user->min_bal) {
-                return back()->with('error', 'Low balance! You need to maintain a minimum balance of $'. $user->min_bal );              
+                return back()->with('error', 'Low balance! You need to maintain a minimum balance of £'. $user->min_bal );              
             }
             
             elseif (Auth::user()->is_active == false ) {
@@ -207,12 +207,10 @@ class HomeController extends Controller
                     // dd($product->price = 2);
 
                     $userProducts = UserProduct::where('user_id', Auth::user()->id)->where('product_id', $product->id)->get()->first();
-                    $userProduct = null;
-                    
-                    // dd($userProducts->count() = 3);
-                    
-                    if ($userProducts) {
                     $userProduct = $userProducts->where('pair_id', $userProducts->pair_id)->get();
+                    // dd($userProduct);
+                    
+                    if ($userProduct->count() > 0) {
                         foreach ($userProduct as $uproduct) {
                             $review = new ProductReview();
                             $review->product_id = $uproduct->product_id;
@@ -324,7 +322,7 @@ class HomeController extends Controller
             $trans->amount = $prof * $combo ;
             $trans->save();
 
-        return redirect()->route('getstarted')->with('success', 'Product submited successfuly ');
+        return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
     }
     }
 
@@ -404,7 +402,7 @@ class HomeController extends Controller
                     # delete user product after optimized...
                     $product->delete();
                 }
-                return redirect()->route('getstarted')->with('success', 'Product submited successfuly ');
+                return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
             }
         }
         else{
@@ -476,7 +474,7 @@ class HomeController extends Controller
               //         return redirect()->route('getstarted')->with('success', 'you\'ve been rewarded with 20 eruo welcome bonus for completing your first optimization set of '. $user->optimized . '/'. $user->tier->daily_optimize);
                  //  }
              //  }}
-                   return redirect()->route('getstarted')->with('success', 'Product submited successfuly ');
+                   return redirect()->route('getstarted')->with('success', 'Product review submited successfuly ');
                
    
            }
@@ -508,7 +506,7 @@ class HomeController extends Controller
 
         $notif = new Notification();
             $notif->title = 'Deposit Pending review';
-            $notif->massage = 'Deposit successful, pending admin review';
+            $notif->massage = 'Deposit successful pending admin review';
             $notif->user_id = $user->id;
         $notif->save();
 
@@ -859,11 +857,11 @@ class HomeController extends Controller
 
             $notif = new Notification();
             $notif->title = 'Withdrawal Request';
-            $notif->massage = 'Withdrawal Request submitted successfully';
+            $notif->massage = 'Withdrawal Request submitted successfuly';
             $notif->user_id = $user->id;
             $notif->save();
 
-            return back()->with('success','withdrawal request of $'. $amount .' submited successfully ');
+            return back()->with('success','withdrawal request of $'. $amount .' submited successfuly ');
         }
     }
 

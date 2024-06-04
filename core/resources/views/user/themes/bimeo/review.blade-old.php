@@ -14,17 +14,17 @@
                     {{ $product->name }}
                 </h4>
 
-                <div class=" price" style="display:flex;color:white;font-size:bold;">
-                    <div class="card-body profile-balance-title-content" style="width: 50%;color:white">
+                <div class=" my-browser-flex my-browser-flex-nowrap my-browser-flex-row my-browser-flex-space-between   profile-my-balance-container-bg profile-group-bg">
+                    <div class="card-body profile-balance-title-content" style="width: 50%">
                         <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
-                            <div class="col"  style="text-align: center;color:white">
+                            <div class="col"  style="text-align: center">
                             
                                 @php
                                     $price ;
                                     $combo ;
                                     // $combo_text ;
                                 @endphp
-                                @if ($userProduct != Null)
+                                @if ($userProduct->count() > 0)
                                     @php
                                         $price = $userProduct->sum('price'); 
                                         $combo = 6;
@@ -36,10 +36,9 @@
                                     @endphp
                                 @endif
                                 
-                                {{-- $product->price, $price --}}
-                               
-                                <p class="profile-my-balance-title" style="margin-top: 6px;display:flex;color:white;font-size:bold;">Total Amount</p>
-                                 <div class="mb-0 font-weight-normal my-browser-flex-item-value-color"style="display:flex;color:white;font-size:bold;"> {{ $price }} USD </div>
+                                
+                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color"> {{ $price }} USD </div>
+                                <p class="profile-my-balance-title" style="margin-top: 6px">Total Amount</p>
                             </div>
                         </div>
                     </div>
@@ -47,22 +46,19 @@
                     <div class="card-body profile-balance-title-content" style="width: 50%">
                         <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
                             <div class="col"  style="text-align: center">
-                                  <p class="profile-my-balance-title" style="margin-top: 8px;display:flex;color:white;font-size:bold;">Profit</p>
-                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color"style="display:flex;color:white;font-size:bold;">{{ $combo * ($price / 100 * Auth::user()->tier->percent) }} USD </div>
-                              
+                                <div class="mb-0 font-weight-normal my-browser-flex-item-value-color">{{ $combo * ($price / 100 * Auth::user()->tier->percent) }} USD </div>
+                                <p class="profile-my-balance-title" style="margin-top: 8px">Profit</p>
                             </div>
                         </div>
                     </div>
                 </div>
-<hr>
+
                 {{-- fetching product crated at time and ratig number --}}
             <div class="text-center mb-4 mt-4">
                 <div class="mb-4 mt-4">
                     <strong>Creation Time</strong> <br>
                     {{ $product->created_at }}
                 </div>
-                <hr>
-                <br>
                 <div class="mb-4 mt-4">
                     <strong>Rating No.</strong> <br>
                     {{  uniqId(5) }}
@@ -73,21 +69,21 @@
                     
                 </div>
             </div>
-            <hr>
-            <br>
-            <div class="card1">
-                <div class="card- body">
+
+
+
+            <div class="card">
+                <div class="card-body">
                     <div class="container">
                         <span id="rateMe1"></span>
                     </div>
+                      
 
                     <form action="{{ route('submit.review',$product->id) }}">
 
                         <Input name="r_id" value="{{ $r_id }}" hidden>
-                        @if($userProduct)
-                          <Input name="pair_id" value="{{ $userProduct->first()->pair_id }}" hidden>
-                        @endif
-                        
+                        <Input name="pair_id" value="{{ $userProduct->first()->pair_id }}" hidden>
+                     
                         <div class="text-center">
                             <strong>Rate Us Now</strong> <br>
 
@@ -148,7 +144,6 @@
                                 });
                             </script>
                         </div>
-                        <hr>
 
                        {{--  <div class="form-group mb-3 text-white">
                             <h5 class="text-light mt-4">Describe your Review (optional)</h5>
@@ -166,7 +161,6 @@
                             <textarea name="comment" id=""  cols="10" class="form-control" placeholder="type here"></textarea>
                         </div>
                         <hr> --}}
-                      
                         <div class="text-center">
                             <button class="btn btn-primary" type="submit"
                             style="font-size: 16px;
