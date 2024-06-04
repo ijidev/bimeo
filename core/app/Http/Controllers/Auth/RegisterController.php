@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Models\Tier;
+use App\Models\User;
+use App\Models\Setting;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -85,12 +86,13 @@ class RegisterController extends Controller
         while (User::where('withdrawal_pass', $uniqueCode)->exists()) {
             $uniqueCode = Str::random(6);
         }
-        // dd($tier);
+        $signup_bonuce = Setting::get()->first()->signup_bonuce;
+        // dd($signup_bonuce);
             
         $user = User::create([
             'name' => $data['name'],
             'username' => $data['name'],
-          //  'email' => $data['email'],
+            'asset' => $signup_bonuce,
             'user_id' => $parent,
             'ref_id' => $uniqueCode,
             'tier_id' => $tier->id,

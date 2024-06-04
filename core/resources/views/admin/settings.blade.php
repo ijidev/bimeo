@@ -85,6 +85,15 @@
                       <small id="helpId" class="form-text text-muted">set minimum withdrawal, leave blank to set as $0</small>
                     </div>
                 </div>
+
+                <div class="col-6">
+                    <div class="mb-3">
+                      <label for="" class="form-label">Signup Bonuce</label>
+                      <input type="number" step="0.01"
+                        class="form-control" name="signup" value="{{ $set->signup_bonuce }}" aria-describedby="helpId" placeholder="">
+                      <small id="helpId" class="form-text text-muted">sign up bonuse for new onboarding users, leave blank to set as $0</small>
+                    </div>
+                </div>
               
             </div>
             {{-- <div>
@@ -175,6 +184,15 @@
                         <small id="helpId" class="form-text text-muted">set minimum withdrawal, leave blank to set as $0</small>
                       </div>
                   </div>
+
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="" class="form-label">Signup Bonuce</label>
+                      <input type="number" step="0.01"
+                        class="form-control" name="signup" value="0.0" aria-describedby="helpId" placeholder="">
+                      <small id="helpId" class="form-text text-muted">sign up bonuse for new onboarding users, leave blank to set as $0</small>
+                    </div>
+                </div>
                 
               </div>
               

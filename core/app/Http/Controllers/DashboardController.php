@@ -403,7 +403,8 @@ class DashboardController extends Controller
             $set->ref_amount = $request->ref;
             $set->term = $request->terms;
             $set->chat = $request->chat;
-            $set->about = $request-about;
+            $set->about = $request->about;
+            $set->signup_bonuce = $request->signup;
             // dd($set);
             $set->save();
         } else {
@@ -415,6 +416,7 @@ class DashboardController extends Controller
             $set->chat = $request->chat;
             $set->term = $request->terms;
             $set->about = $request->about;
+            $set->signup_bonuce = $request->signup;
             //save certificate
             If($request->cert){
               $file = $request->file('cert');
