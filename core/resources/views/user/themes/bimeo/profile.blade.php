@@ -46,21 +46,21 @@
         </div>
     </div>
     <div class=" my-browser-flex my-browser-flex-nowrap my-browser-flex-row my-browser-flex-space-between   profile-my-balance-container-bg profile-group-bg" style="background-color:white;">
-        <div class="card-body profile-balance-title-content" style="width: 50%;">
+        <div class="card-body profile-balance-title-content" style="width: 50%; border-right:1px black solid;">
             <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
                 <div class="col"  style="text-align: center; color:skyblue;">
                     <p class="profile-my-balance-title" style="margin-top: 6px;  color:black;">Total Commission</p>
-                    <div class="mb-0 font-weight-normal my-browser-flex-item-value-color">{{$user->balance}}USD </div>
+                    <div class="mb-0 font-weight-normal my-browser-flex-item-value-color" style="color:black;">{{$user->balance}}USD </div>
                     
                 </div>
             </div>
         </div>
         <div class="content-v-line" style="width: 1px;height: 80px;margin-top: 10px;"></div>
-        <div class="card-body profile-balance-title-content" style="width: 50%">
+        <div class="card-body profile-balance-title-content" style="width: 50%; border-left:1px black solid;">
             <div class=" my-browser-flex my-browser-flex-nowrap  text-center">
                 <div class="col"  style="text-align: center">
-                     <p class="profile-my-balance-title" style="margin-top: 8px;  color:black;">Asset</p>
-                    <div class="mb-0 font-weight-normal my-browser-flex-item-value-color">{{$user->asset}} USD </div>
+                     <p class="profile-my-balance-title" style="margin-top: 8px; color:black;">Asset</p>
+                    <div class="mb-0 font-weight-normal my-browser-flex-item-value-color" style="color:black;">{{$user->asset}} USD </div>
                    
                 </div>
             </div>
