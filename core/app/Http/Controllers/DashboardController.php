@@ -199,7 +199,7 @@ class DashboardController extends Controller
 
             $notif = new Notification();
             $notif->title = 'Account Debited';
-            $notif->massage = 'Your Account has been Debit with $'.$request->amount;
+            $notif->massage = 'Your Account has been Debited with $'.$request->amount;
             $notif->user_id = $user->id;
             $notif->save();
 
@@ -324,7 +324,7 @@ class DashboardController extends Controller
 
         $notif = new Notification();
         $notif->title = 'Withdrawal Request Approved';
-        $notif->massage = 'Your Withdrawl Request has been appeoved successfuly fund will arive in your provided wallet address soon.';
+        $notif->massage = 'Your Withdrawl Request has been appeoved successfuly fund will arrive in your provided wallet address soon.';
         $notif->user_id = $withd->user->id;
         $notif->save();
 
@@ -372,7 +372,7 @@ class DashboardController extends Controller
 
         $notif = new Notification();
         $notif->title = 'Deposit Request Approved';
-        $notif->massage = 'Your deposit Request has been appeoved successfuly and your account is now active. Now you can start optimizing to make profit.';
+        $notif->massage = 'Your deposit Request has been appeoved and your account is now active. Now you can start optimizing to make profit.';
         $notif->user_id = $deposit->user->id;
         $notif->save();
 

@@ -27,6 +27,7 @@ class User extends Authenticatable implements LaratrustUser
         'email',
         'gender',
         'tier_id',
+        'signup_bonuce',
         'type',
         'user_id',
         'ref_id',

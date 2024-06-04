@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Tier;
 use App\Models\User;
-use App\Models\Setting;
-use Illuminate\Support\Str;
+use App\Models\Tier;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -79,7 +78,8 @@ class RegisterController extends Controller
             $parent = null ;
         }
         
-        $tier = Tier::where('name', 'Normal')->get()->first();
+        $tier = Tier::where('name', 'Silver')->get()->first();
+        // dd($tier);
         $uniqueCode = Str::random(6);
 
         // Make sure the generated code is unique
@@ -92,7 +92,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'username' => $data['name'],
-            'asset' => $signup_bonuce,
+            'signup_bonuce' => $signup_bonuce,
             'user_id' => $parent,
             'ref_id' => $uniqueCode,
             'tier_id' => $tier->id,
