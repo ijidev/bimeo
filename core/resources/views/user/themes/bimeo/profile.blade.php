@@ -121,7 +121,7 @@
                 </div>
                 <p class="small mt-2">Bind Wallet</p>
             </a>
-            <a href="{{route('logout')}}" class=" text-center my-actin-icon tabs_btn1">
+            <a href="{{route('logout.check')}}" class=" text-center my-actin-icon tabs_btn1">
                 <div class="avatar form-group-bg" style="border-radius:10px;padding: 15px;">
                     <img src="{{asset('bimeoassets/images/my_logout.png')}}" class="avatar-30">
                 </div>

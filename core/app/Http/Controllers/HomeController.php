@@ -874,19 +874,28 @@ class HomeController extends Controller
         // dd($set);
         return view($theme_path . 'contact', compact('set'));
     }
-
+    
     public function notify()
     {
         $theme_path = Setting::first()->theme_path;
         $notification = Notification::where('user_id', Auth::user()->id)->get(); 
         // dd($notification);
         $notifies = Notification::where('user_id', Auth::user()->id)
-            ->where('is_read', false)->get();
-
-            foreach ($notifies as $notify) {
-                $notify->is_read = true;
-                $notify->update();
-            }
+        ->where('is_read', false)->get();
+        
+        foreach ($notifies as $notify) {
+            $notify->is_read = true;
+            $notify->update();
+        }
         return view($theme_path . 'notify', compact('notification'));
+    }
+
+
+    public function signout()
+    {
+        $theme_path = Setting::first()->theme_path;
+        // $set = Setting::get()->first();
+        // dd($set);
+        return view($theme_path . 'logout',);
     }
 }

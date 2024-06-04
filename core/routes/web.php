@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/notification', 'notify')->name('notify');
             
         Route::get('/my-team', 'upline')->name('upline');
+        Route::get('/sign-out', 'signout')->name('logout.check');
 
         Route::get('/records', 'record')->name('record');
         Route::get('/completed-records', 'completedRecord')->name('record.completed');
